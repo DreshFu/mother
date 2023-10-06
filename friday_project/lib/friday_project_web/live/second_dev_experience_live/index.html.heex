@@ -1,0 +1,43 @@
+<.header>
+  Listing Second dev experiences
+  <:actions>
+    <.link patch={~p"/second_dev_experiences/new"}>
+      <.button>New Second dev experience</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="second_dev_experiences"
+  rows={@streams.second_dev_experiences}
+  row_click={fn {_id, second_dev_experience} -> JS.navigate(~p"/second_dev_experiences/#{second_dev_experience}") end}
+>
+  <:col :let={{_id, second_dev_experience}} label="Name"><%= second_dev_experience.name %></:col>
+  <:col :let={{_id, second_dev_experience}} label="Description"><%= second_dev_experience.description %></:col>
+  <:col :let={{_id, second_dev_experience}} label="Nb thing"><%= second_dev_experience.nb_thing %></:col>
+  <:action :let={{_id, second_dev_experience}}>
+    <div class="sr-only">
+      <.link navigate={~p"/second_dev_experiences/#{second_dev_experience}"}>Show</.link>
+    </div>
+    <.link patch={~p"/second_dev_experiences/#{second_dev_experience}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, second_dev_experience}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: second_dev_experience.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="second_dev_experience-modal" show on_cancel={JS.patch(~p"/second_dev_experiences")}>
+  <.live_component
+    module={FridayProjectWeb.SecondDevExperienceLive.FormComponent}
+    id={@second_dev_experience.id || :new}
+    title={@page_title}
+    action={@live_action}
+    second_dev_experience={@second_dev_experience}
+    patch={~p"/second_dev_experiences"}
+  />
+</.modal>

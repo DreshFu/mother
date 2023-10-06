@@ -19,4 +19,20 @@ defmodule FridayProject.FridaysFixtures do
 
     first_dev_experience
   end
+
+  @doc """
+  Generate a second_dev_experience.
+  """
+  def second_dev_experience_fixture(attrs \\ %{}) do
+    {:ok, second_dev_experience} =
+      attrs
+      |> Enum.into(%{
+        name: "some name",
+        description: "some description",
+        nb_thing: 42
+      })
+      |> FridayProject.Fridays.create_second_dev_experience()
+
+    second_dev_experience
+  end
 end
