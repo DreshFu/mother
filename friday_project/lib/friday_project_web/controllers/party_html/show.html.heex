@@ -1,0 +1,16 @@
+<.header>
+  Party <%= @party.id %>
+  <:subtitle>This is a party record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/parties/#{@party}/edit"}>
+      <.button>Edit party</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Date party"><%= @party.date_party %></:item>
+  <:item title="Name"><%= @party.name %></:item>
+</.list>
+
+<.back navigate={~p"/parties"}>Back to parties</.back>

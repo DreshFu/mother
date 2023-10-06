@@ -1,0 +1,8 @@
+<.header>
+  Edit Party <%= @party.id %>
+  <:subtitle>Use this form to manage party records in your database.</:subtitle>
+</.header>
+
+<.party_form changeset={@changeset} action={~p"/parties/#{@party}"} />
+
+<.back navigate={~p"/parties"}>Back to parties</.back>
