@@ -197,4 +197,100 @@ defmodule FridayProject.Fridays do
   def change_second_dev_experience(%SecondDevExperience{} = second_dev_experience, attrs \\ %{}) do
     SecondDevExperience.changeset(second_dev_experience, attrs)
   end
+
+  alias FridayProject.Fridays.ThirdDevExperience
+
+  @doc """
+  Returns the list of third_dev_experiences.
+
+  ## Examples
+
+      iex> list_third_dev_experiences()
+      [%ThirdDevExperience{}, ...]
+
+  """
+  def list_third_dev_experiences do
+    Repo.all(ThirdDevExperience)
+  end
+
+  @doc """
+  Gets a single third_dev_experience.
+
+  Raises `Ecto.NoResultsError` if the Third dev experience does not exist.
+
+  ## Examples
+
+      iex> get_third_dev_experience!(123)
+      %ThirdDevExperience{}
+
+      iex> get_third_dev_experience!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_third_dev_experience!(id), do: Repo.get!(ThirdDevExperience, id)
+
+  @doc """
+  Creates a third_dev_experience.
+
+  ## Examples
+
+      iex> create_third_dev_experience(%{field: value})
+      {:ok, %ThirdDevExperience{}}
+
+      iex> create_third_dev_experience(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_third_dev_experience(attrs \\ %{}) do
+    %ThirdDevExperience{}
+    |> ThirdDevExperience.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a third_dev_experience.
+
+  ## Examples
+
+      iex> update_third_dev_experience(third_dev_experience, %{field: new_value})
+      {:ok, %ThirdDevExperience{}}
+
+      iex> update_third_dev_experience(third_dev_experience, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_third_dev_experience(%ThirdDevExperience{} = third_dev_experience, attrs) do
+    third_dev_experience
+    |> ThirdDevExperience.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a third_dev_experience.
+
+  ## Examples
+
+      iex> delete_third_dev_experience(third_dev_experience)
+      {:ok, %ThirdDevExperience{}}
+
+      iex> delete_third_dev_experience(third_dev_experience)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_third_dev_experience(%ThirdDevExperience{} = third_dev_experience) do
+    Repo.delete(third_dev_experience)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking third_dev_experience changes.
+
+  ## Examples
+
+      iex> change_third_dev_experience(third_dev_experience)
+      %Ecto.Changeset{data: %ThirdDevExperience{}}
+
+  """
+  def change_third_dev_experience(%ThirdDevExperience{} = third_dev_experience, attrs \\ %{}) do
+    ThirdDevExperience.changeset(third_dev_experience, attrs)
+  end
 end

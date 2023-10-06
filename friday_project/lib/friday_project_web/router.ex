@@ -31,6 +31,8 @@ defmodule FridayProjectWeb.Router do
 
     live("/second_dev_experiences/:id", SecondDevExperienceLive.Show, :show)
     live("/second_dev_experiences/:id/show/edit", SecondDevExperienceLive.Show, :edit)
+
+    resources("/third_dev_experiences", ThirdDevExperienceController)
   end
 
   # Other scopes may use custom stacks.

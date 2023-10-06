@@ -1,0 +1,17 @@
+<.header>
+  Third dev experience <%= @third_dev_experience.id %>
+  <:subtitle>This is a third_dev_experience record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/third_dev_experiences/#{@third_dev_experience}/edit"}>
+      <.button>Edit third_dev_experience</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @third_dev_experience.name %></:item>
+  <:item title="Description"><%= @third_dev_experience.description %></:item>
+  <:item title="Nb thing"><%= @third_dev_experience.nb_thing %></:item>
+</.list>
+
+<.back navigate={~p"/third_dev_experiences"}>Back to third_dev_experiences</.back>

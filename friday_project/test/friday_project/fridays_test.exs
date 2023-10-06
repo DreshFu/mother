@@ -118,4 +118,62 @@ defmodule FridayProject.FridaysTest do
       assert %Ecto.Changeset{} = Fridays.change_second_dev_experience(second_dev_experience)
     end
   end
+
+  describe "third_dev_experiences" do
+    alias FridayProject.Fridays.ThirdDevExperience
+
+    import FridayProject.FridaysFixtures
+
+    @invalid_attrs %{name: nil, description: nil, nb_thing: nil}
+
+    test "list_third_dev_experiences/0 returns all third_dev_experiences" do
+      third_dev_experience = third_dev_experience_fixture()
+      assert Fridays.list_third_dev_experiences() == [third_dev_experience]
+    end
+
+    test "get_third_dev_experience!/1 returns the third_dev_experience with given id" do
+      third_dev_experience = third_dev_experience_fixture()
+      assert Fridays.get_third_dev_experience!(third_dev_experience.id) == third_dev_experience
+    end
+
+    test "create_third_dev_experience/1 with valid data creates a third_dev_experience" do
+      valid_attrs = %{name: "some name", description: "some description", nb_thing: 42}
+
+      assert {:ok, %ThirdDevExperience{} = third_dev_experience} = Fridays.create_third_dev_experience(valid_attrs)
+      assert third_dev_experience.name == "some name"
+      assert third_dev_experience.description == "some description"
+      assert third_dev_experience.nb_thing == 42
+    end
+
+    test "create_third_dev_experience/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Fridays.create_third_dev_experience(@invalid_attrs)
+    end
+
+    test "update_third_dev_experience/2 with valid data updates the third_dev_experience" do
+      third_dev_experience = third_dev_experience_fixture()
+      update_attrs = %{name: "some updated name", description: "some updated description", nb_thing: 43}
+
+      assert {:ok, %ThirdDevExperience{} = third_dev_experience} = Fridays.update_third_dev_experience(third_dev_experience, update_attrs)
+      assert third_dev_experience.name == "some updated name"
+      assert third_dev_experience.description == "some updated description"
+      assert third_dev_experience.nb_thing == 43
+    end
+
+    test "update_third_dev_experience/2 with invalid data returns error changeset" do
+      third_dev_experience = third_dev_experience_fixture()
+      assert {:error, %Ecto.Changeset{}} = Fridays.update_third_dev_experience(third_dev_experience, @invalid_attrs)
+      assert third_dev_experience == Fridays.get_third_dev_experience!(third_dev_experience.id)
+    end
+
+    test "delete_third_dev_experience/1 deletes the third_dev_experience" do
+      third_dev_experience = third_dev_experience_fixture()
+      assert {:ok, %ThirdDevExperience{}} = Fridays.delete_third_dev_experience(third_dev_experience)
+      assert_raise Ecto.NoResultsError, fn -> Fridays.get_third_dev_experience!(third_dev_experience.id) end
+    end
+
+    test "change_third_dev_experience/1 returns a third_dev_experience changeset" do
+      third_dev_experience = third_dev_experience_fixture()
+      assert %Ecto.Changeset{} = Fridays.change_third_dev_experience(third_dev_experience)
+    end
+  end
 end
