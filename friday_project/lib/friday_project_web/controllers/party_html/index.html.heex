@@ -15,7 +15,7 @@
     <%= party.name %>
   </:col>
   <:col :let={party} label="First dev experience">
-    <%= party.first_dev_experience.name %>
+    <%= party.first_dev_experience && party.first_dev_experience.name %>
   </:col>
   <:action :let={party}>
     <div class="sr-only">
