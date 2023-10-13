@@ -1,10 +1,31 @@
 import Config
 
 # Configure your database
+
+# env vars
+env_db_user =
+  System.get_env("POSTGRES_USR") ||
+    raise """
+    environment variable POSTGRES_USR is missing.
+    """
+
+env_db_passwd =
+  System.get_env("POSTGRES_PASSWD") ||
+    raise """
+    environment variable POSTGRES_PASSWD is missing.
+    """
+
+env_db_hostname =
+  System.get_env("POSTGRES_HOSTNAME") ||
+    raise """
+    environment variable POSTGRES_HOSTNAME is missing.
+    Example: localhost
+    """
+
 config :friday_project, FridayProject.Repo,
-  username: "dimitri",
-  password: "dim",
-  hostname: "localhost",
+  username: env_db_user,
+  password: env_db_passwd,
+  hostname: env_db_hostname,
   database: "friday_project_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
