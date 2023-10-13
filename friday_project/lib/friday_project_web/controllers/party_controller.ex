@@ -10,8 +10,14 @@ defmodule FridayProjectWeb.PartyController do
   end
 
   def new(conn, _params) do
+    first_dev_experiences =
+      FridayProject.Fridays.list_first_dev_experiences()
+      |> Enum.map(fn f_exp ->
+        {f_exp.name, f_exp.id}
+      end)
+
     changeset = WeekEnds.change_party(%Party{})
-    render(conn, :new, changeset: changeset)
+    render(conn, :new, changeset: changeset, first_dev_experiences: first_dev_experiences)
   end
 
   def create(conn, %{"party" => party_params}) do
@@ -33,8 +39,20 @@ defmodule FridayProjectWeb.PartyController do
 
   def edit(conn, %{"id" => id}) do
     party = WeekEnds.get_party_with_preload!(id)
+
+    first_dev_experiences =
+      FridayProject.Fridays.list_first_dev_experiences()
+      |> Enum.map(fn f_exp ->
+        {f_exp.name, f_exp.id}
+      end)
+
     changeset = WeekEnds.change_party(party)
-    render(conn, :edit, party: party, changeset: changeset)
+
+    render(conn, :edit,
+      party: party,
+      changeset: changeset,
+      first_dev_experiences: first_dev_experiences
+    )
   end
 
   def update(conn, %{"id" => id, "party" => party_params}) do
