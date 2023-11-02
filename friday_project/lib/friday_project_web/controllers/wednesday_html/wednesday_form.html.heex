@@ -1,0 +1,11 @@
+<.simple_form :let={f} for={@changeset} action={@action} >
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:firstname]} type="text" label="Firstname" />
+  <.input field={f[:name]} type="text" label="Name" />
+  <.input field={f[:first_dev_experience_id]} type="select" label="First Experience" options={@first_dev_experiences_tuple} />
+  <:actions>
+    <.button>Save Wednesday</.button>
+  </:actions>
+</.simple_form>

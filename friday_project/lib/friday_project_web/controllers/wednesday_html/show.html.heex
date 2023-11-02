@@ -1,0 +1,16 @@
+<.header>
+  Wednesday <%= @wednesday.id %>
+  <:subtitle>This is a wednesday record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/wednesdays/#{@wednesday}/edit"}>
+      <.button>Edit wednesday</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Firstname"><%= @wednesday.firstname %></:item>
+  <:item title="Name"><%= @wednesday.name %></:item>
+</.list>
+
+<.back navigate={~p"/wednesdays"}>Back to wednesdays</.back>

@@ -1,0 +1,8 @@
+<.header>
+  Edit Static tuesday <%= @static_tuesday.id %>
+  <:subtitle>Use this form to manage static_tuesday records in your database.</:subtitle>
+</.header>
+
+<.static_tuesday_form changeset={@changeset} action={~p"/statictuesdays/#{@static_tuesday}"} />
+
+<.back navigate={~p"/statictuesdays"}>Back to statictuesdays</.back>

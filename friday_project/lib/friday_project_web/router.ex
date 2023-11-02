@@ -32,9 +32,19 @@ defmodule FridayProjectWeb.Router do
     live("/second_dev_experiences/:id", SecondDevExperienceLive.Show, :show)
     live("/second_dev_experiences/:id/show/edit", SecondDevExperienceLive.Show, :edit)
 
+    live "/tuesdays", TuesdayLive.Index, :index
+    live "/tuesdays/new", TuesdayLive.Index, :new
+    live "/tuesdays/:id/edit", TuesdayLive.Index, :edit
+
+    live "/tuesdays/:id", TuesdayLive.Show, :show
+    live "/tuesdays/:id/show/edit", TuesdayLive.Show, :edit
+
     resources("/third_dev_experiences", ThirdDevExperienceController)
 
     resources("/parties", PartyController)
+    resources "/statictuesdays", StaticTuesdayController
+    resources "/wednesdays", WednesdayController
+
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,17 @@
+<.header>
+  Static tuesday <%= @static_tuesday.id %>
+  <:subtitle>This is a static_tuesday record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/statictuesdays/#{@static_tuesday}/edit"}>
+      <.button>Edit static_tuesday</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @static_tuesday.name %></:item>
+  <:item title="Description"><%= @static_tuesday.description %></:item>
+  <:item title="Nb thing"><%= @static_tuesday.nb_thing %></:item>
+</.list>
+
+<.back navigate={~p"/statictuesdays"}>Back to statictuesdays</.back>

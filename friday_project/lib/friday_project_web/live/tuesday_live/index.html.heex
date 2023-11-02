@@ -1,0 +1,43 @@
+<.header>
+  Listing Tuesdays
+  <:actions>
+    <.link patch={~p"/tuesdays/new"}>
+      <.button>New Tuesday</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="tuesdays"
+  rows={@streams.tuesdays}
+  row_click={fn {_id, tuesday} -> JS.navigate(~p"/tuesdays/#{tuesday}") end}
+>
+  <:col :let={{_id, tuesday}} label="Name"><%= tuesday.name %></:col>
+  <:col :let={{_id, tuesday}} label="Description"><%= tuesday.description %></:col>
+  <:col :let={{_id, tuesday}} label="Nb thing"><%= tuesday.nb_thing %></:col>
+  <:action :let={{_id, tuesday}}>
+    <div class="sr-only">
+      <.link navigate={~p"/tuesdays/#{tuesday}"}>Show</.link>
+    </div>
+    <.link patch={~p"/tuesdays/#{tuesday}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, tuesday}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: tuesday.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="tuesday-modal" show on_cancel={JS.patch(~p"/tuesdays")}>
+  <.live_component
+    module={FridayProjectWeb.TuesdayLive.FormComponent}
+    id={@tuesday.id || :new}
+    title={@page_title}
+    action={@live_action}
+    tuesday={@tuesday}
+    patch={~p"/tuesdays"}
+  />
+</.modal>

@@ -1,0 +1,9 @@
+<.header>
+  Edit Wednesday <%= @wednesday.id %>
+  <:subtitle>Use this form to manage wednesday records in your database.</:subtitle>
+</.header>
+
+<.wednesday_form changeset={@changeset} first_dev_experiences_tuple={@first_dev_experiences_tuple} action={~p"/wednesdays/#{@wednesday}"} />
+
+<.back navigate={~p"/wednesdays"}>Back to wednesdays</.back>
+

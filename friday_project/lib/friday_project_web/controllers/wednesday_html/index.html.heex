@@ -1,0 +1,27 @@
+<.header>
+  Listing Wednesdays
+  <:actions>
+    <.link href={~p"/wednesdays/new"}>
+      <.button>New Wednesday</.button>
+    </.link>
+  </:actions>
+</.header>
+
+
+<.table id="wednesdays" rows={@wednesdays} row_click={&JS.navigate(~p"/wednesdays/#{&1}")}>
+  <:col :let={wednesday} label="Firstname"><%= wednesday.firstname %></:col>
+  <:col :let={wednesday} label="Name"><%= wednesday.name %></:col>
+  <:col :let={wednesday} label="First dev experience"><%= wednesday.first_dev_experience && wednesday.first_dev_experience.name %></:col>
+
+  <:action :let={wednesday}>
+    <div class="sr-only">
+      <.link navigate={~p"/wednesdays/#{wednesday}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/wednesdays/#{wednesday}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={wednesday}>
+    <.link href={~p"/wednesdays/#{wednesday}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

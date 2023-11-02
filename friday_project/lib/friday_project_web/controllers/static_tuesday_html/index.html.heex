@@ -1,0 +1,25 @@
+<.header>
+  Listing Statictuesdays
+  <:actions>
+    <.link href={~p"/statictuesdays/new"}>
+      <.button>New Static tuesday</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="statictuesdays" rows={@statictuesdays} row_click={&JS.navigate(~p"/statictuesdays/#{&1}")}>
+  <:col :let={static_tuesday} label="Name"><%= static_tuesday.name %></:col>
+  <:col :let={static_tuesday} label="Description"><%= static_tuesday.description %></:col>
+  <:col :let={static_tuesday} label="Nb thing"><%= static_tuesday.nb_thing %></:col>
+  <:action :let={static_tuesday}>
+    <div class="sr-only">
+      <.link navigate={~p"/statictuesdays/#{static_tuesday}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/statictuesdays/#{static_tuesday}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={static_tuesday}>
+    <.link href={~p"/statictuesdays/#{static_tuesday}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
