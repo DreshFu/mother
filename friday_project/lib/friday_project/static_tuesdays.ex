@@ -53,6 +53,8 @@ defmodule FridayProject.StaticTuesdays do
     %StaticTuesday{}
     |> StaticTuesday.changeset(attrs)
     |> Repo.insert()
+    |> static_tuesdays_broadcast(:new_static_tuesdays)
+    |> IO.inspect(label: "debug here >>> ")
   end
 
   @doc """
@@ -101,4 +103,41 @@ defmodule FridayProject.StaticTuesdays do
   def change_static_tuesday(%StaticTuesday{} = static_tuesday, attrs \\ %{}) do
     StaticTuesday.changeset(static_tuesday, attrs)
   end
+
+@doc """
+  Returns listener to Phoenix PubSub.
+
+  ## Examples
+
+      iex> blockchain_subscribe()
+      :ok
+
+  """
+  def static_tuesdays_subscribe do
+    Phoenix.PubSub.subscribe(FridayProject.PubSub, "static_tuesday_topic")
+  end
+
+  @doc """
+  Broadcasts to the above PubSub.
+
+  ## Examples
+
+      iex> party_broadcast({:ok, %Party{}}, :specific_event)
+      {:ok, %Party{}}
+
+  """
+  def static_tuesdays_broadcast({:error, _reason} = error, _event) do
+    error
+  end
+
+  def static_tuesdays_broadcast({:ok, static_tuesdays}, event) do
+    Phoenix.PubSub.broadcast(
+      FridayProject.PubSub,
+      "static_tuesday_topic",
+      {event, static_tuesdays}
+    )
+
+    {:ok, static_tuesdays}
+  end
+
 end

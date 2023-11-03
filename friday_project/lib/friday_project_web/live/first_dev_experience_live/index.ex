@@ -6,6 +6,9 @@ defmodule FridayProjectWeb.FirstDevExperienceLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    if connected?(socket) do
+      FridayProject.StaticTuesdays.static_tuesdays_subscribe()
+    end
     {:ok, stream(socket, :first_dev_experiences, Fridays.list_first_dev_experiences())}
   end
 
@@ -35,6 +38,19 @@ defmodule FridayProjectWeb.FirstDevExperienceLive.Index do
   @impl true
   def handle_info({FridayProjectWeb.FirstDevExperienceLive.FormComponent, {:saved, first_dev_experience}}, socket) do
     {:noreply, stream_insert(socket, :first_dev_experiences, first_dev_experience)}
+  end
+
+  def handle_info({:new_static_tuesdays, static_tuesdays}, socket) do
+    {:noreply,
+     socket
+     |> put_flash(
+       :info,
+       "une nouvelle teuf !! => #{static_tuesdays.name}"
+     )}
+  end
+
+  def handle_info(_, socket) do
+    {:noreply, socket}
   end
 
   @impl true
